@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+@font-face {
+        font-family: 'Gudea';
+        src: url('../fonts/Gudea-Regular.otf');
+    }
+@font-face {
+        font-family: 'Route159';
+        font-weight: 100;
+        src: url('../fonts/route159-ultralight.otf');
+    }
+
+@font-face {
+        font-family: 'Route159';
+        font-weight: 100;
+        font-style: italic;
+        src: url('../fonts/route159-ultralightitalic.otf');
+    }
+@font-face {
+        font-family: 'Route159';
+        font-weight: 200;
+        src: url('../fonts/route159-light.otf');
+    }
+
+@font-face {
+        font-family: 'Route159';
+        font-weight: 200;
+        font-style: italic;
+        src: url('../fonts/route159-lightitalic.otf');
+    }
+@font-face {
+        font-family: 'Route159';
+        font-weight: 300;
+        src: url('../fonts/route159-light.otf');
+    }
+    
+@font-face {
+    font-family: 'Route159';
+    font-weight: 300;
+    font-style: italic;
+    src: url('../fonts/route159-lightitalic.otf');
+}
+
+@font-face {
+        font-family: 'Route159';
+        font-weight: 400;
+        font-style: italic;
+        src: url('../fonts/route159-italic.otf');
+    }
+@font-face {
+        font-family: 'Route159';
+        font-weight: 400;
+        src: url('../fonts/route159-regular.otf');
+    }
+
+
+@font-face {
+    font-family: 'Route159';
+    font-weight: 500;
+    src: url('../fonts/route159-semibold.otf');
+}
+
+@font-face {
+    font-family: 'Route159';
+    font-weight: 500;
+    font-style: italic;
+    src: url('../fonts/route159-semibolditalic.otf');
+}
+
+@font-face {
+    font-family: 'Route159';
+    font-weight: 600;
+    font-style: italic;
+    src: url('../fonts/route159-semibolditalic.otf');
+}
+@font-face {
+    font-family: 'Route159';
+    font-weight: 600;
+    src: url('../fonts/route159-semibold.otf');
+}
+
+@font-face {
+    font-family: 'Route159';
+    font-weight: 700;
+    font-style: italic;
+    src: url('../fonts/route159-semibolditalic.otf');
+}
+@font-face {
+    font-family: 'Route159';
+    font-weight: 700;
+    src: url('../fonts/route159-semibold.otf');
+}
+
+@font-face {
+    font-family: 'Route159';
+    font-weight: 800;
+    font-style: italic;
+    src: url('../fonts/route159-bolditalic.otf');
+}
+@font-face {
+    font-family: 'Route159';
+    font-weight: 800;
+    src: url('../fonts/route159-bold.otf');
+}
+@font-face {
+    font-family: 'Route159';
+    font-weight: 900;
+    font-style: italic;
+    src: url('../fonts/route159-heavyitalic.otf');
+}
+@font-face {
+    font-family: 'Route159';
+    font-weight: 900;
+    src: url('../fonts/route159-heavy.otf');
+}
+
+
+
+
+
+
+
+    html {
+        font-family: Route159
+    }
+
+}
+
+         .label {
+             @apply justify-start gap-2;
+         }
+
+        .label-text-alt {
+            @apply badge badge-sm badge-secondary uppercase font-thin text-2xs;
+         }

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>View Book</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<script>
+  const showAddCollectionCopyWindow = () => {
+    document.getElementById('addContentCopy').style.display = 'block'
+  }
+
+  const hideAddCollectionCopyWindow = () => {
+    document.getElementById('addContentCopy').style.display = 'none'
+  }
+
+  const addCollectionCopy = async () => {
+    let proposedCopyIDNumber = document.getElementById('collectionCopyIDNumberBAR').value
+    let proposedDescription = document.getElementById('collectionCopyDescriptionBAR').value
+    try {
+      await fetch("/yellow/books/view/<%= book['_id']%>/addcollectioncopy", {
+          method: "POST",
+          body: JSON.stringify({
+            "copyIDNumber": proposedCopyIDNumber,
+            "description": proposedDescription
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((res) => {
+          document.getElementById('collectionCopyIDNumberBAR').classList.add("input-success");
+          document.getElementById('collectionCopyDescriptionBAR').classList.add("input-success");
+          return res
+        })
+        .then((res) => {
+          setTimeout(() => {
+            window.location.href = res.url;
+          }, 500)
+        })
+
+    } catch (err) {
+      console.log(err)
+      document.getElementById('collectionCopyIDNumberBAR').classList.add("input-error")
+      document.getElementById('collectionCopyDescriptionBAR').classList.add("input-error")
+    }
+  }
+
+  const showEditCollectionCopyWindow = (copyObjID, copyID, copyDescription) => {
+    document.getElementById('editContentCopy').style.display = 'block'
+    document.getElementById('editedCollectionCopyObjIDNumberBAR').value = copyObjID
+    document.getElementById('editedCollectionCopyIDNumberBAR').value = copyID
+    document.getElementById('editedCollectionCopyDescriptionBAR').value = copyDescription
+  }
+
+  const hideEditCollectionCopyWindow = () => {
+    document.getElementById('editContentCopy').style.display = 'none'
+    document.getElementById('editedCollectionCopyObjIDNumberBAR').value = null
+    document.getElementById('editedCollectionCopyIDNumberBAR').value = null
+    document.getElementById('editedCollectionCopyDescriptionBAR').value = null
+  }
+
+  const editCollectionCopy = async () => {
+    let proposedCopyObjIDNumber = document.getElementById('editedCollectionCopyObjIDNumberBAR').value
+    let proposedCopyIDNumber = document.getElementById('editedCollectionCopyIDNumberBAR').value
+    let proposedDescription = document.getElementById('editedCollectionCopyDescriptionBAR').value
+    try {
+      await fetch("/yellow/books/view/<%= book['_id']%>/editcollectioncopy", {
+          method: "POST",
+          body: JSON.stringify({
+            "copyObjIDNumber": proposedCopyObjIDNumber,
+            "copyIDNumber": proposedCopyIDNumber,
+            "description": proposedDescription
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((res) => {
+          document.getElementById('editedCollectionCopyIDNumberBAR').classList.add("input-success");
+          document.getElementById('editedCollectionCopyDescriptionBAR').classList.add("input-success");
+          return res
+        })
+        .then((res) => {
+          setTimeout(() => {
+            window.location.href = res.url;
+          }, 500)
+        })
+
+    } catch (err) {
+      console.log(err)
+      document.getElementById('editedCollectionCopyIDNumberBAR').classList.add("input-error")
+      document.getElementById('editedCollectionCopyDescriptionBAR').classList.add("input-error")
+    }
+  }
+
+  const deleteCollectionCopy = async (copyObjID) => {
+    try {
+      await fetch("/yellow/books/view/<%= book['_id']%>/deletecollectioncopy", {
+          method: "POST",
+          body: JSON.stringify({
+            "copyObjIDNumber": copyObjID,
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((res) => {
+          window.location.href = res.url
+        })
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+</script>
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Books'}) %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
+    <div class="mb-4">
+      <div class="uppercase">Books</div>
+      <div class="text-4xl font-semibold">Viewing <%= book.title %> </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="col-span-2">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Identification</div>
+            <div class="mt-2 grid grid-cols-4 gap-5 items-center">
+              <div>
+                <div class="w-full bg-base-100 border aspect-[1/1.6] shadow-md bg-cover bg-center" style="background-image: url(<%=book.cover%>)">
+                </div>
+              </div>
+              <div class="col-span-3 max-w-min">
+                <label class="label"><span class="label-text">Book ID Number</span></label>
+                <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.bookIDNumber %></div>
+                <label class="label"><span class="label-text">Book ISBN Number</span></label>
+                <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.ISBN %></div>
+              </div>
+            </div>
+
+            <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">General</div>
+            <label class="label"><span class="label-text">Title</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.title %></div>
+            <label class="label"><span class="label-text">Author</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.author %></div>
+            <label class="label"><span class="label-text">Publisher</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.publisher %></div>
+            <label class="label"><span class="label-text">Edition</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.edition %></div>
+          </div>
+          <div>
+            <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Additional</div>
+            <label class="label"><span class="label-text">Publication Type</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2">
+              <% var optionsInput =  ['Book', 'Article', 'Newspaper', 'TextualResource', 'MediaResource', 'Other'] %>
+              <% var optionsOutput =  ['Book', 'Article', 'Newspaper', 'Textual Resource', 'Media Resource', 'Other'] %>
+              <%= optionsOutput[optionsInput.indexOf(locals.book.publicationType)] %>
+            </div>
+            <label class="label"><span class="label-text">Year Published</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.yearPublished %></div>
+            <label class="label"><span class="label-text">Language</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.language %></div>
+            <label class="label"><span class="label-text">Description</span></label>
+            <div class="border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.description %></div>
+            <div class="mt-4 ml-1 uppercase text-base-500 text-xs">Location</div>
+            <label class="label"><span class="label-text">Building</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%= book.location.building.name %></div>
+            <label class="label"><span class="label-text">Building Section</span></label>
+            <div class="text-2xl border-b-2 border-base-200 w-full max-w-xs ml-1 mb-2"><%=  book.location.buildingSection.name %></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 lg:col-span-1">
+        <div class="border-2 border-primary h-full w-full rounded-xl px-4 py-4">
+          <div class="mb-4 btn-control flex justify-between items-center">
+            <div class="text-3xl font-semibold"> Stored Copies </div>
+            <button onclick="showAddCollectionCopyWindow()" class="btn btn-primary btn-sm">New Copy</button>
+
+          </div>
+          <div class="flex flex-col gap-3 content-between">
+            <div id="addContentCopy" class="w-full bg-gray-100 border-base-300 border rounded-box p-4 hidden">
+              <div class="flex flex-row justify-between my-1">
+                <div class="text-xl font-semibold mb-2">Add New Copy</div>
+                <div class="flex gap-2">
+                  <button class="btn btn-primary btn-sm" onclick="addCollectionCopy()">Save</button>
+                  <button onclick="hideAddCollectionCopyWindow()" class="btn btn-error btn-square btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between gap-3">
+                <div>
+                  <label class="label"><span class="label-text">Copy ID Number</span></label>
+                  <% let randomID = Math.floor(Math.random()*10000000000) %>
+                  <input type="text" name="collectionCopyIDNumber" id="collectionCopyIDNumberBAR" placeholder="ID Number" class="input input-bordered w-full input-sm bg-base" value=<%=randomID%> disabled />
+                </div>
+                <div>
+                  <label class="label"><span class="label-text">Copy Remarks</span></label>
+                  <input type="text" name="collectionCopyDescription" id="collectionCopyDescriptionBAR" placeholder="Remarks" class="input input-bordered w-full input-sm" />
+                </div>
+              </div>
+            </div>
+            <div id="editContentCopy" class="w-full bg-gray-100 border-base-300 border rounded-box p-4 hidden">
+              <div class="flex flex-row justify-between my-1">
+                <div class="text-xl font-semibold mb-2">Edit Copy</div>
+                <div class="flex gap-2">
+                  <button class="btn btn-primary btn-sm" onclick="editCollectionCopy()">Save</button>
+                  <button onclick="hideEditCollectionCopyWindow()" class="btn btn-error btn-square btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between gap-3">
+                <div>
+                  <label class="label"><span class="label-text">Copy ID Number</span></label>
+                  <input type="text" name="editedCollectionCopyIDNumber" id="editedCollectionCopyIDNumberBAR" placeholder="ID Number" class="input input-bordered w-full input-sm bg-base" disabled />
+                  <input type="text" name="editedCollectionCopyObjIDNumber" id="editedCollectionCopyObjIDNumberBAR" placeholder="Obj ID Number" class="input input-bordered w-full input-sm hidden" disabled />
+                </div>
+                <div>
+                  <label class="label"><span class="label-text">Copy Remarks</span></label>
+                  <input type="text" name="editedCollectionCopyDescription" id="editedCollectionCopyDescriptionBAR" placeholder="Remarks" class="input input-bordered w-full input-sm" />
+                </div>
+              </div>
+            </div>
+            <% for( let index = 0; index < locals.collectionCopies.length; index++ ) { %>
+            <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box p-0">
+              <div class="collapse-title min-h-0 py-1">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="text-l font-medium"><%= collectionCopies[index]['copyIDNumber'] %> </div>
+                    <div class="text-xs"><%= collectionCopies[index]['description'] %></div>
+                  </div>
+                  <% if (locals.loanedCopies.includes(locals.collectionCopies[index]['_id'].toString())) { %>
+                  <div class="badge badge-sm">On Loan</div>
+                  <% } else { %>
+                  <div class="badge badge-sm badge-secondary">Available</div>
+                  <% } %>
+                </div>
+              </div>
+              <div class="collapse-content">
+                <p class="text-sm mt-2">
+                  <button class="btn btn-primary btn-sm" onclick="showEditCollectionCopyWindow(`<%= collectionCopies[index]['_id'] %>`,`<%= collectionCopies[index]['copyIDNumber'] %>`, `<%= collectionCopies[index]['description'] %>`)">Edit</button>
+                  <button class="btn btn-error btn-sm" onclick="deleteCollectionCopy(`<%= collectionCopies[index]['_id'] %>`)">Delete</button>
+                </p>
+              </div>
+            </div>
+            <% } %>
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>New Loan</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<script>
+  let readerSearchResults
+  let bookSearchResults
+  let selectedReader
+  let selectedBook
+  let selectedCopy
+
+  const redirectCheck = () => {
+    if (selectedReader !== undefined && selectedBook !== undefined && selectedCopy !== undefined) {
+      window.location.href = `/yellow/counter/loans/new/next/${selectedReader._id}/${selectedCopy._id}`
+    }
+  }
+
+  document.addEventListener("click", redirectCheck);
+
+
+  const searchRelevantReaders = async () => {
+    readerSearchResults = undefined
+    let proposedReaderDetails = document.getElementById('reader-search-bar').value
+    if (proposedReaderDetails.length > 0) {
+      try {
+        await fetch("/yellow/api/readers", {
+            redirect: 'follow',
+            method: "POST",
+            body: JSON.stringify({
+              "input": proposedReaderDetails,
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((res) => {
+            document.getElementById('reader-search-bar').classList.add("input-success")
+            return res.json()
+          })
+          .then((resJson) => {
+            readerSearchResults = resJson
+            outputRelevantReaders()
+          })
+      } catch (err) {
+        console.log(err)
+        document.getElementById('reader-search-bar').classList.add("input-error")
+      }
+    }
+  }
+
+  const outputRelevantReaders = async () => {
+    document.getElementById('reader-search-results').innerHTML = ''
+    readerSearchResults.forEach(e => {
+      document.getElementById('reader-search-results').innerHTML += `
+  <div class='w-full border border-base-300 rounded-box p-2 flex flex-grow-0 flex-shrink-0 gap-4 items-center'>
+    <div class='h-10 aspect-square bg-primary rounded-lg'></div> 
+    <div class='flex justify-between items-center w-full'>
+      <div>
+        <div class='uppercase text-xl font-semibold'> ${e.firstName} ${e.surName} </div>
+        <div class='text-sm'> ID ${e.readerIDNumber} • ${e.emailAddress} • ${e.phoneNumber} </div>
+      </div>
+        <button onclick='confirmSelectedReader("${e._id}")' class='btn btn-primary btn-sm'>Select</button>
+      </div>
+    </div>
+  `
+    })
+  }
+
+  const confirmSelectedReader = (readerObjectId) => {
+    selectedReader = readerSearchResults.filter(r => r._id == readerObjectId)[0]
+    outputSelectedReader()
+  }
+
+  const cancelSelectedReader = () => {
+    selectedReader = undefined
+    document.getElementById('reader-selection-window').style.display = 'none'
+    document.getElementById('reader-search-window').style.display = 'block'
+  }
+
+  const outputSelectedReader = () => {
+    document.getElementById('reader-selection-window').style.display = 'block'
+    document.getElementById('reader-search-window').style.display = 'none'
+    document.getElementById('readerCard-id-bar').innerText = selectedReader.readerIDNumber
+    document.getElementById('readerCard-name-bar').innerHTML = selectedReader.firstName + '<br>' + selectedReader.surName
+    document.getElementById('readerCard-phoneNumber-bar').innerText = selectedReader.phoneNumber
+    document.getElementById('readerCard-emailAddress-bar').innerText = selectedReader.emailAddress
+  }
+
+  const searchRelevantBooks = async () => {
+    bookSearchResults = undefined
+    let proposedBookDetails = document.getElementById('book-search-bar').value
+    if (proposedBookDetails.length > 0) {
+      try {
+        await fetch("/yellow/api/books", {
+            method: "POST",
+            body: JSON.stringify({
+              "input": proposedBookDetails,
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((res) => {
+            document.getElementById('book-search-bar').classList.add("input-success")
+            return res.json()
+          })
+          .then((resJson) => {
+            bookSearchResults = resJson
+            console.log(bookSearchResults)
+            outputRelevantBooks()
+          })
+      } catch (err) {
+        console.log(err)
+        document.getElementById('book-search-bar').classList.add("input-error")
+      }
+    }
+  }
+
+  const outputRelevantBooks = () => {
+    document.getElementById('book-search-results').innerHTML = ''
+    let bookSearchValue = document.getElementById('book-search-bar').value
+    if (bookSearchValue.length == 10 && Number(bookSearchValue)) {
+      let relevantBookEntry = bookSearchResults[0]
+      let relevantCopyEntry = relevantBookEntry.collectionCopies.filter(el => el.copyIDNumber == bookSearchValue)[0]
+
+      document.getElementById('book-search-results').innerHTML += `
+    <div tabindex="0" class="collapse collapse-arrow border border-primary-focus bg-primary rounded-box p-0">
+      <div class="collapse-title min-h-0 py-2">
+        <div class="flex justify-between items-center">
+          <div>
+        <div class="text-xs font-medium">${relevantBookEntry.title} </div>
+        <div class="text-xs">By ${relevantBookEntry.author}</div>
+        <div class="text-l font-medium">Copy ID ${relevantCopyEntry.copyIDNumber} </div>
+        </div>
+        <div><button class="btn btn-outline btn-sm" onClick="confirmSelectedCopy('${relevantBookEntry._id}','${relevantCopyEntry._id}')">Select</button></div>
+        </div>
+        
+      </div>
+      <div class="collapse-content">
+        <p class="text-sm mt-2"><span class="uppercase">Copy's Description: </span><span class="font-extralight">${relevantCopyEntry.description}</span></p>
+        <p class="text-sm mt-2"><span class="uppercase">Book's ISBN: </span><span class="font-extralight">${relevantBookEntry.ISBN}</span></p>
+        <p class="text-sm mt-2"><span class="uppercase">Book's Publishing Details: </span><span class="font-extralight">Edition ${relevantBookEntry.edition} published in ${relevantBookEntry.yearPublished} by ${relevantBookEntry.publisher}</span></p>
+      </div>
+    </div>`
+    } else {
+      bookSearchResults.forEach(e => {
+        document.getElementById('book-search-results').innerHTML += `
+  <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box p-0">
+    <div class="collapse-title min-h-0 py-2">
+      <div class="text-xs font-medium"> Book ID ${e.bookIDNumber} </div>
+      <div class="text-l font-medium">${e.title} </div>
+      <div class="text-xs">By ${e.author}</div>
+    </div>
+    <div class="collapse-content flex flex-col gap-2" id="book-result-bar-${e.bookIDNumber}">
+      <div class="flex justify-between items-center">
+        <p class="text-sm mt-2"><span class="uppercase">ISBN: </span><span class="font-extralight">${e.ISBN}</span></p>
+        <p class="text-sm mt-2"><span class="uppercase">Details: </span><span class="font-extralight">Edition ${e.edition} published in ${e.yearPublished} by ${e.publisher}</span></p>
+        <p class="text-sm mt-2"><span class="uppercase">Copies: </span><span class="font-extralight">${e.collectionCopies.length}</span></p>
+      </div>
+      <div class="text-xl">Copies</div>
+      </div></div>
+`
+        e.collectionCopies.forEach(e2 => {
+          console.log(e2)
+          document.getElementById(`book-result-bar-${e.bookIDNumber}`).innerHTML += `
+
+<div class="border border-primary-focus bg-primary rounded-md p-2 flex items-center justify-between">
+  <div>${e2.copyIDNumber}</div>
+  <div><button onClick="confirmSelectedCopy('${e._id}','${e2._id}')" class="btn btn-outline btn-sm">Select</button></div>
+  </div>
+`
+        })
+      })
+    }
+  }
+
+  const confirmSelectedCopy = (bookObjectId, copyObjectId) => {
+    selectedBook = bookSearchResults.filter(r => r._id == bookObjectId)[0]
+    selectedCopy = selectedBook.collectionCopies.filter(r2 => r2._id == copyObjectId)[0]
+    outputSelectedCopy()
+  }
+  const cancelSelectedCopy = () => {
+    selectedBook = undefined
+    selectedCopy = undefined
+    document.getElementById('book-selection-window').style.display = 'none'
+    document.getElementById('book-search-window').style.display = 'block'
+  }
+
+  const outputSelectedCopy = () => {
+    document.getElementById('book-selection-window').style.display = 'block'
+    document.getElementById('book-search-window').style.display = 'none'
+    document.getElementById('bookCard-copyIDNumber-bar').innerText = selectedCopy.copyIDNumber
+    document.getElementById('bookCard-bookIDNumber-bar').innerHTML = selectedBook.bookIDNumber
+    document.getElementById('bookCard-title-bar').innerText = selectedBook.title
+    document.getElementById('bookCard-author-bar').innerText = selectedBook.author
+    document.getElementById('bookCard-cover-bar').style.backgroundImage = `url("${selectedBook.cover}")`
+  }
+</script>
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Counter'}) %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
+    <div class="flex justify-between mb-8">
+      <div>
+        <div class="uppercase">Counter</div>
+        <div class="text-4xl font-semibold">New Loan</div>
+      </div>
+      <div class="btn-control">
+        <a href="/yellow/counter/loans/" class="btn btn-error">Discard</a>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div>
+        <div class="text-3xl mb-4 font-semibold">Reader Selection</div>
+        <div id="reader-search-window">
+          <div class="flex w-full gap-3" id="reader-search-control">
+            <input type="text" id="reader-search-bar" class="input input-bordered input-xl w-full" placeholder="Search Reader by Name or ID" />
+            <button class="btn btn-primary" onclick="searchRelevantReaders()">Search</button>
+          </div>
+          <div id="reader-search-results" class="flex flex-col gap-2 mt-4"></div>
+        </div>
+        <div id="reader-selection-window" class="hidden">
+          <div class="flex w-full gap-3 justify-end" id="reader-selection-control">
+            <button class="btn btn-primary btn-sm btn-error" onclick="cancelSelectedReader()">Cancel</button>
+          </div>
+          <div id="reader-selection-results" class="flex flex-col items-center gap-2 mt-4">
+            <div class="w-full max-w-md bg-base-100 border aspect-video shadow-md p-6 flex flex-initial gap-6">
+              <div class="h-2/5 aspect-square bg-primary rounded-xl"></div>
+              <div class="overflow-hidden whitespace-nowrap w-full flex flex-col gap-1">
+                <div class="uppercase text-xs overflow-hidden text-ellipsis">Reader ID Number</div>
+                <div class="text-2xl  overflow-hidden text-ellipsis" id="readerCard-id-bar"></div>
+                <div class="uppercase text-xs overflow-hidden text-ellipsis">Reader Name</div>
+                <div class="text-2xl  overflow-hidden text-ellipsis" id="readerCard-name-bar"></div>
+                <div class="uppercase text-xs overflow-hidden text-ellipsis">Phone Number</div>
+                <div class="text-md  overflow-hidden text-ellipsis" id="readerCard-phoneNumber-bar"></div>
+                <div class="uppercase text-xs overflow-hidden text-ellipsis">E-mail Address</div>
+                <div class="text-md  overflow-hidden text-ellipsis" id="readerCard-emailAddress-bar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-3xl mb-4 font-semibold">Inventory Selection</div>
+        <div id="book-search-window">
+          <div class="flex w-full gap-3">
+            <input type="text" id="book-search-bar" class="input input-bordered input-xl w-full" placeholder="Search Book by Name, Author, ISBN, or ID" />
+            <button class="btn btn-primary" onclick="searchRelevantBooks()">Search</button>
+          </div>
+          <div id="book-search-results" class="flex flex-col gap-2 mt-4"></div>
+        </div>
+        <div id="book-selection-window" class="hidden">
+          <div class="flex w-full gap-3 justify-end" id="book-selection-control">
+            <button class="btn btn-primary btn-sm btn-error" onclick="cancelSelectedCopy()">Cancel</button>
+          </div>
+          <div id="book-selection-results" class="flex flex-row items-center justify-around gap-2 mt-4">
+            <div id="bookCard-cover-bar" class="aspect-[1/1.6] h-72 border-base-200 shadow-md bg-cover bg-center"></div>
+            <div class="h-full flex flex-col gap-1 items-start">
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">Copy ID Number</div>
+              <div class="text-2xl  overflow-hidden text-ellipsis" id="bookCard-copyIDNumber-bar"></div>
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">Book Title</div>
+              <div class="text-2xl  overflow-hidden text-ellipsis" id="bookCard-title-bar"></div>
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">Authored by</div>
+              <div class="text-md  overflow-hidden text-ellipsis" id="bookCard-author-bar"></div>
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">Book ID Number</div>
+              <div class="text-md  overflow-hidden text-ellipsis" id="bookCard-bookIDNumber-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>

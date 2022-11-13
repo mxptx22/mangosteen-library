@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Log into Mangosteen Library</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<header>
+  <%- include('./yellowtoolbar2.ejs'); %>
+
+</header>
+
+<body style="background-image: url('/images/library-background.jpg')" class="min-h-screen h-full bg-cover bg-fixed">
+
+  <div id="wrapper" class="mx-6 my-6">
+
+
+
+
+
+    <% if (locals.ouch == 1) { %>
+    <div class="alert alert-error shadow-lg">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Your credentials appear to be incorrect. Check your username and password and try again.</span>
+      </div>
+    </div>
+    <%} else if (locals.ouch == 2) { %>
+    <div class="alert alert-warning shadow-lg">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span>You might have to log in again.</span>
+      </div>
+    </div>
+    <% } %>
+
+
+
+
+
+    <div class="mx-auto max-w-screen-xl sm:px-6 lg:px-8 ">
+      <div class="mx-auto max-w-xl ">
+
+        <form action="/users/login" method="POST" class="mt-6 mb-0 space-y-4 rounded-lg p-5 md:p-7 shadow-2xl bg-white">
+          <p class="text-xl xl:text-3xl font-medium">Sign in to your account</p>
+
+          <div>
+            <label class="text-lg font-medium">Username</label>
+
+            <div class="relative mt-1">
+              <input type="text" id="email" name="usernameInput" class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm focus:border-primary ring-primary" placeholder="Enter username" />
+
+              <span class="absolute inset-y-0 right-4 inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="text-base md:text-lg font-medium">Password</label>
+
+            <div class="relative mt-1">
+              <input type="password" name="passwordInput" id="password" class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm focus:border-primary ring-primary" placeholder="Enter password" />
+
+              <span class="absolute inset-y-0 right-4 inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 16 16" stroke="">
+                  <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z" />
+                  <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <button type="submit" class="block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-primary-content">
+            Sign in
+          </button>
+
+
+        </form>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+</body>
+
+</html>

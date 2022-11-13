@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<script>
+  const updateReaderCard = () => {
+    document.getElementById("readerCard-id-bar").innerText = document.getElementById("readerIDNumberBar").value
+    document.getElementById("readerCard-name-bar").innerText = document.getElementById("readerFirstNameBar").value + ' ' + document.getElementById("readerSurNameBar").value
+    document.getElementById("readerCard-phoneNumber-bar").innerText = document.getElementById("readerPhoneNumberBar").value
+    document.getElementById("readerCard-emailAddress-bar").innerText = document.getElementById("readerEmailAddressBar").value
+  }
+
+  addEventListener("load", updateReaderCard)
+  addEventListener("input", updateReaderCard)
+</script>
+
+<body>
+
+  <form method="post" <% if(!locals.reader){ %> action="/yellow/readers/add" <% } %> <% if(locals.reader){ %> action="/yellow/readers/edit/<%=reader['_id']%>" <% } %>>
+    <div class="form-control">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div>
+          <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Identification</div>
+          <label class="label"><span class="label-text">Reader ID Number</span><span class="label-text-alt">*</span></label>
+          <input type="hidden" class="input input-bordered w-full max-w-xs" name="readerIDNumber" value="<%=readerIdNumber%>" />
+          <input type="text" id="readerIDNumberBar" placeholder="Reader's ID Number" class="input input-bordered w-full max-w-xs" value="<%=readerIdNumber%>" disabled />
+          <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">General</div>
+          <label class="label"><span class="label-text">First Name</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Reader's First Name" id="readerFirstNameBar" class="input input-bordered w-full max-w-xs" name="firstName" <% if(locals.reader){ %> value="<%=reader.firstName%>" <% } %> />
+          <label class="label"><span class="label-text">Surname</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Reader's Surname" id="readerSurNameBar" class="input input-bordered w-full max-w-xs" name="surName" <% if(locals.reader){ %> value="<%=reader.surName%>" <% } %> />
+          <label class="label"><span class="label-text">Phone Number</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Reader's Phone" id="readerPhoneNumberBar" class="input input-bordered w-full max-w-xs" name="phoneNumber" <% if(locals.reader){ %> value="<%=reader.phoneNumber%>" <% } %> />
+          <label class="label"><span class="label-text">E-mail Address</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Reader's E-mail Address" id="readerEmailAddressBar" class="input input-bordered w-full max-w-xs" name="emailAddress" <% if(locals.reader){ %> value="<%=reader.emailAddress%>" <% } %> />
+        </div>
+        <div>
+          <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Residential Address</div>
+          <label class="label"><span class="label-text">Address Line 1</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Reader's Address" class="input input-bordered w-full max-w-xs" name="address1" <% if(locals.reader){ %> value="<%=reader.address1%>" <% } %> />
+          <label class="label"><span class="label-text">Address Line 2</span></label>
+          <input type="text" placeholder="Reader's Address Continued" class="input input-bordered w-full max-w-xs" name="address2" <% if(locals.reader){ %> value="<%=reader.address2%>" <% } %> />
+          <label class="label"><span class="label-text">Post Code</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Reader's Post Code" class="input input-bordered w-full max-w-xs" name="addressPostcode" <% if(locals.reader){ %> value="<%=reader.addressPostcode%>" <% } %> />
+          <label class="label"><span class="label-text">City</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Reader's City" class="input input-bordered w-full max-w-xs" name="addressCity" <% if(locals.reader){ %> value="<%=reader.addressCity%>" <% } %> />
+          <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Additional</div>
+          <label class="label"><span class="label-text">Residence Status</span><span class="label-text-alt">*</span></label>
+          <select id="readerLocalResidenceBar" class="select select-bordered w-full max-w-xs" name="localResidence">
+            <option disabled <% if(!locals.reader){ %> selected <% } %>>Is Local Resident?</option>
+            <option <% if(locals.reader.localResidence == 'true'){ %> selected <% } %> value="true">Yes</option>
+            <option <% if(locals.reader.localResidence == 'false'){ %> selected <% } %> value="false">No</option>
+          </select>
+          <label class="label"><span class="label-text">Education Status</span><span class="label-text-alt">*</span></label>
+          <select id="readerEducationStatusBar" class="select select-bordered w-full max-w-xs" name="educationStatus">
+            <option disabled <% if(!locals.reader){ %> selected <% } %>>Readers's Education Status?</option>
+            <option <% if(locals.reader.educationStatus == 1){ %> selected <% } %> value="1">Yes - Primary & Middle</option>
+            <option <% if(locals.reader.educationStatus == 2){ %> selected <% } %> value="2">Yes - Higher</option>
+            <option <% if(locals.reader.educationStatus == 3){ %> selected <% } %> value="3">No - Obtained Higher Education Diploma</option>
+            <option <% if(locals.reader.educationStatus == 4){ %> selected <% } %> value="4">No - Obtained Diploma below Higher Education</option>
+            <option <% if(locals.reader.educationStatus == 5){ %> selected <% } %> value="5">No - No Education Record</option>
+            <option <% if(locals.reader.educationStatus == 6){ %> selected <% } %> value="6">Other</option>
+          </select>
+        </div>
+        <div class="flex flex-col lg:items-center gap-5">
+          <div class="hidden lg:flex w-full max-w-md bg-base-100 border aspect-video shadow-md p-6 flex-initial gap-6">
+            <div class="h-2/5 aspect-square bg-primary rounded-xl"></div>
+            <div class="overflow-hidden whitespace-nowrap w-full flex flex-col gap-1">
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">Reader ID Number</div>
+              <div class="text-2xl  overflow-hidden text-ellipsis" id="readerCard-id-bar"></div>
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">Reader Name</div>
+              <div class="text-2xl  overflow-hidden text-ellipsis" id="readerCard-name-bar"></div>
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">Phone Number</div>
+              <div class="text-md  overflow-hidden text-ellipsis" id="readerCard-phoneNumber-bar"></div>
+              <div class="uppercase text-xs overflow-hidden text-ellipsis">E-mail Address</div>
+              <div class="text-md  overflow-hidden text-ellipsis" id="readerCard-emailAddress-bar"></div>
+            </div>
+          </div>
+          <input type="submit" value="Save" class="btn btn-primary btn-wide" />
+          <a href="/yellow/readers" class="btn btn-error btn-wide">Discard</a>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Prolong Loan</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+</head>
+
+
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Counter'}) %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
+    <div class="flex justify-between mb-8">
+      <div>
+        <div class="uppercase">Counter</div>
+        <div class="text-4xl font-semibold">Prolong Loan to <%= reader.firstName %> <%=reader.surName%> </div>
+      </div>
+      <div class="btn-control flex flex-col lg:flex-row gap-2">
+        <a href="/yellow/counter/loans/" class="btn btn-error">Discard</a>
+        <a class="btn btn-disabled" id="confirm-button">Confirm Change</a>
+      </div>
+    </div>
+
+
+    <div class="flex flex-col md:flex-row gap-16">
+      <div class="w-full flex flex-col gap-2">
+        <div class="text-3xl mb-4 font-semibold">Loan Details</div>
+        <div id="returndate-info-container" class="w-full xl:w-3/5 min-h-16 border rounded-md border-gray-300 flex p-2 gap-5 text-gray-700">
+          <div id="returndate-icon" class="w-min h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="aspect-square h-12 text-gray-400" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1zM1 9h4a1 1 0 0 1 0 2H1V9z" />
+              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+            </svg>
+          </div>
+          <div id="returndate-details" class="w-full">
+            <div class="text-xl font-bold">Loan Record</div>
+            <div>Loan issued <%= initialIssueDate.toLocaleDateString() %> </div>
+            <div>Return by <%= initialReturnDate.toLocaleDateString() %> </div>
+          </div>
+        </div>
+        <div id="reader-info-container" class="w-full xl:w-3/5 min-h-16 border rounded-md border-gray-300 flex p-2 gap-5 text-gray-700">
+          <div id="reader-icon" class="w-min h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="aspect-square h-12 text-gray-400" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z" />
+            </svg>
+          </div>
+          <div id="reader-details" class="w-full">
+            <div class="text-xl font-bold">Reader Details</div>
+            <div> Reader ID <%= reader.readerIDNumber %> </div>
+            <div> <%= reader.firstName %> <%= reader.surName %> </div>
+            <div> <%= reader.emailAddress %> </div>
+            <div> <%= reader.phoneNumber %> </div>
+          </div>
+        </div>
+        <div id="book-info-container" class="w-full xl:w-3/5 min-h-16 border rounded-md border-gray-300 flex p-2 gap-5 text-gray-700">
+          <div id="book-icon" class="w-min h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="aspect-square h-12 text-gray-400" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+            </svg>
+          </div>
+          <div id="book-details" class="w-full">
+            <div class="text-xl font-bold">Book Details</div>
+            <div> Copy ID <%= copy.copyIDNumber %> </div>
+            <div> <%= book.title %> </div>
+            <div> By <%= book.author %> </div>
+            <div> ISBN <%= book.ISBN %> </div>
+            <div> Book ID <%= book.bookIDNumber %> </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-min">
+        <div>
+          <div class="text-3xl mb-4 mr-0.5 font-semibold min-w-[25fr] inline-block">Return Date</div>
+          <div id="inXDays" class="text-3xl mb-4 ml-0.5 font-light min-w-[25fr] inline-block"></div>
+        </div>
+
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="flex flex-row flex-wrap w-full lg:w-max gap-4 justify-center">
+            <button class="btn btn-primary btn-sm" onclick="setIn1Week()">In a Week</button>
+            <button class="btn btn-primary btn-sm" onclick="setIn2Weeks()">In 2 Weeks</button>
+            <button class="btn btn-primary btn-sm" onclick="setIn3Weeks()">In 3 Weeks</button>
+            <button class="btn btn-primary btn-sm" onclick="setIn4Weeks()">In 4 Weeks</button>
+          </div>
+          <div id="calendar"></div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</body>
+
+<script src="/javascripts/air-datepicker/air-datepicker.js"></script>
+<script src="/javascripts/air-datepicker/locale/en.js"></script>
+
+<link rel='stylesheet' href='/javascripts/air-datepicker/air-datepicker.css' />
+
+<script>
+  let initialDate = new Date('<%-initialReturnDate%>')
+  initialDate.setHours(0, 0, 0)
+
+  let dp = new AirDatepicker('#calendar', {
+    inline: true,
+    locale: localeEn,
+    buttons: ['today', 'clear'],
+    onSelect: ({
+      date,
+      formattedDate,
+      datepicker
+    }) => {
+      if (date < initialDate) {
+        returnDate = undefined
+        document.getElementById('inXDays').innerText = `must be prospective`
+        redirectCheck()
+        return
+      } else {
+        returnDate = date
+        returnDateDistance = Math.round((returnDate - initialDate) / 86400000)
+        if (returnDateDistance > 1) {
+          document.getElementById('inXDays').innerText = `in ${returnDateDistance} days`
+        }
+        if (returnDateDistance == 1) {
+          document.getElementById('inXDays').innerText = `in ${returnDateDistance} day`
+        }
+        if (returnDateDistance < 1) {
+          document.getElementById('inXDays').innerText = `must be prospective`
+        }
+        redirectCheck()
+      }
+    }
+
+  })
+
+  let returnDate
+  let returnDateDistance
+
+  function setIn1Week() {
+    let in1week = new Date()
+    in1week.setHours(0, 0, 0)
+    in1week.setMonth(initialDate.getMonth())
+    in1week.setFullYear(initialDate.getFullYear())
+    in1week.setDate(initialDate.getDate() + 7)
+    returnDate = in1week
+    dp.selectDate(returnDate)
+    document.getElementById('inXDays').innerText = returnDate
+  }
+
+  function setIn2Weeks() {
+    let in2weeks = new Date()
+    in2weeks.setHours(0, 0, 0)
+    in2weeks.setMonth(initialDate.getMonth())
+    in2weeks.setFullYear(initialDate.getFullYear())
+    in2weeks.setDate(initialDate.getDate() + 14)
+    returnDate = in2weeks
+    dp.selectDate(returnDate)
+    document.getElementById('inXDays').innerText = returnDate
+  }
+
+  function setIn3Weeks() {
+    let in3weeks = new Date()
+    in3weeks.setHours(0, 0, 0)
+    in3weeks.setMonth(initialDate.getMonth())
+    in3weeks.setFullYear(initialDate.getFullYear())
+    in3weeks.setDate(initialDate.getDate() + 21)
+    returnDate = in3weeks
+    dp.selectDate(returnDate)
+    document.getElementById('inXDays').innerText = returnDate
+  }
+
+  function setIn4Weeks() {
+    let in4weeks = new Date()
+    in4weeks.setHours(0, 0, 0)
+    in4weeks.setMonth(initialDate.getMonth())
+    in4weeks.setFullYear(initialDate.getFullYear())
+    in4weeks.setDate(initialDate.getDate() + 28)
+    returnDate = in4weeks
+    dp.selectDate(returnDate)
+    document.getElementById('inXDays').innerText = returnDate
+  }
+
+  const redirectCheck = () => {
+    if (returnDate !== undefined && returnDateDistance > 0) {
+      document.getElementById('confirm-button').classList.remove('btn-disabled')
+      document.getElementById('confirm-button').classList.add('btn-primary')
+      document.getElementById('confirm-button').addEventListener("click", submitProlong)
+
+    } else {
+      document.getElementById('confirm-button').classList.add('btn-disabled')
+      document.getElementById('confirm-button').classList.remove('btn-primary')
+      document.getElementById('confirm-button').removeEventListener("click", submitProlong)
+    }
+  }
+</script>
+
+<script>
+  const submitProlong = async () => {
+    await fetch("/yellow/counter/loans/prolong", {
+        method: "POST",
+        body: JSON.stringify({
+          "dateToReturn": returnDate,
+          "loanObjId": "<%= loanObjId %>",
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then((res) => {
+        window.location.href = res.url;
+      })
+  }
+</script>
+
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<script>
+  const urlRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+
+  const injectURL = (coverURL) => {
+    if (urlRegex.test(coverURL)) {
+      document.getElementById("bookCoverDisplay").style.backgroundImage = `url('${coverURL}')`
+    }
+  }
+</script>
+
+
+<body>
+
+
+
+  <form method="post" <% if(!locals.book){ %> action="/yellow/books/add" <% } %> <% if(locals.book){ %> action="/yellow/books/edit/<%=book['_id']%>" <% } %>>
+    <div class="form-control">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div>
+          <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Identification</div>
+          <label class="label">
+            <span class="label-text">Book ID Number</span>
+            <span class="label-text-alt">*</span>
+          </label>
+          <input type="hidden" class="input input-bordered w-full max-w-xs" name="bookIDNumber" value="<%=bookIdNumber%>" />
+          <input type="text" id="bookIDNumberBar" placeholder="Book's ID Number" class="input input-bordered w-full max-w-xs" value="<%=bookIdNumber%>" disabled />
+
+          <label class="label">
+            <span class="label-text">ISBN Number</span>
+          </label>
+          <input type="text" placeholder="Book's ISBN" class="input input-bordered w-full max-w-xs" name="ISBN" <% if(locals.book){ %> value="<%=book.ISBN%>" <% } %> />
+
+          <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">General</div>
+          <label class="label"><span class="label-text">Title</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Book's Title" class="input input-bordered w-full max-w-xs" name="title" <% if(locals.book){ %> value="<%=book.title%>" <% } %> />
+          <label class="label"><span class="label-text">Author</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Book's Author" class="input input-bordered w-full max-w-xs" name="author" <% if(locals.book){ %> value="<%=book.author%>" <% } %> />
+          <label class="label"><span class="label-text">Publisher</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Book's Publisher" class="input input-bordered w-full max-w-xs" name="publisher" <% if(locals.book){ %> value="<%=book.publisher%>" <% } %> />
+          <label class="label"><span class="label-text">Edition</span></label>
+          <input type="text" placeholder="Book's Edition" class="input input-bordered w-full max-w-xs" name="edition" <% if(locals.book){ %> value="<%=book.edition%>" <% } %> />
+        </div>
+        <div>
+          <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Additional</div>
+
+          <label class="label"><span class="label-text">Publication Type</span><span class="label-text-alt">*</span></label>
+          <select class="select select-bordered w-full max-w-xs" name="publicationType" <% if(locals.book){ %> value="<%=book.publicationType%>" <% } %>>
+            <option disabled <% if(!locals.book){ %> selected <% } %>>Book's Publication Type?</option>
+            <option value="Book">Book</option>
+            <option value="Article">Article</option>
+            <option value="Newspaper">Newspaper</option>
+            <option value="TextualResource">Textual Resource</option>
+            <option value="MediaResource">Media Resource</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label class="label"><span class="label-text">Cover URL</span></label>
+          <input type="text" placeholder="Book's Cover URL" id="bookCoverURLBar" class="input input-bordered w-full max-w-xs" name="cover" oninput="injectURL(this.value)" <% if(locals.book){ %> value="<%=book.cover%>" <% } %> />
+          <label class="label"><span class="label-text">Year Published</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Book's Year of Publishing" class="input input-bordered w-full max-w-xs" name="yearPublished" <% if(locals.book){ %> value="<%=book.yearPublished%>" <% } %> />
+          <label class="label"><span class="label-text">Language</span><span class="label-text-alt">*</span></label>
+          <input type="text" placeholder="Book's Language" class="input input-bordered w-full max-w-xs" name="language" <% if(locals.book){ %> value="<%=book.language%>" <% } %> />
+          <label class="label"><span class="label-text">Description</span></label>
+          <textarea type="text" placeholder="Book's Description" class="textarea textarea-bordered w-full max-w-xs" name="description" <% if(locals.book){ %> value="<%=book.description%>" <% } %>></textarea>
+          <div class="mt-4 ml-1 uppercase text-base-500 text-xs">Location</div>
+          <div class="flex gap-2 w-full max-w-xs flex-auto justify-between">
+            <div class="w-1/2">
+              <label class="label"><span class="label-text">Building</span><span class="label-text-alt">*</span></label>
+              <select class="select select-bordered w-full max-w-xs" name="building">
+                <option disabled <% if(!locals.book){ %> selected <% } %>>Building?</option>
+                <% for (var i = 0; i < buildings.length; i++) { %>
+                <option <% if(locals.book){ %> <% if (locals.book.location.building.name == buildings[i].name) { %> selected <% } %> <% } %> value="<%=buildings[i]._id%>"><%=buildings[i].name%></option>
+                <% } %>
+              </select>
+            </div>
+            <div class="w-1/2">
+              <label class="label"><span class="label-text">Section</span><span class="label-text-alt">*</span></label>
+              <select class="select select-bordered w-full max-w-xs" name="buildingSection">
+                <option disabled <% if(!locals.book){ %> selected <% } %>>Building Section?</option>
+                <% for (var i = 0; i < buildingSections.length; i++) { %>
+                <option <% if(locals.book){ %> <% if (locals.book.location.buildingSection.name == buildingSections[i].name) { %> selected <% } %> <% } %> value="<%=buildingSections[i]._id%>"><%=buildingSections[i].name%></option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="flex flex-col lg:items-center gap-5">
+          <div class="hidden lg:block aspect-[1/1.6] lg:h-[55vh] bg-base-100 border shadow-md bg-cover bg-center" id="bookCoverDisplay" style="background-image: url(<%=book.cover%>)"></div>
+          <input type="submit" value="Save" class="btn btn-primary btn-wide" />
+          <a href="/yellow/books" class="btn btn-error btn-wide">Discard</a>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+
+</body>
+
+</html>

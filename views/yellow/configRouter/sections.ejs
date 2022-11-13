@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+  const editBuilding = async (e) => {
+    if (document.getElementById(`BAR${e}`)) {
+      let proposedName = document.getElementById(`BAR${e}`).value
+
+      try {
+        if (proposedName.length < 1) {
+          throw new Error('String must not be empty.')
+        }
+        await fetch("/yellow/config/sections/editbuilding", {
+            method: "POST",
+            body: JSON.stringify({
+              "name": proposedName,
+              "id": e
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((res) => {
+            document.getElementById(`BAR${e}`).classList.remove("input-warning");
+            return res
+          })
+          .then((res) => {
+            document.getElementById(`BAR${e}`).classList.add("input-success");
+            return res
+          })
+          .then((res) => {
+            setTimeout(() => {
+              window.location.href = res.url;
+            }, 500)
+          })
+      } catch (err) {
+        console.log(err)
+        document.getElementById(`BAR${e}`).classList.remove("input-warning")
+        document.getElementById(`BAR${e}`).classList.add("input-error")
+      }
+    } else {
+      const remainingText = document.getElementById(e).innerText
+      console.log(remainingText)
+      document.getElementById(e).innerHTML = `<input id="BAR${e}" class="input input-bordered input-warning w-full max-w-xs" value=${remainingText}>`
+    }
+  }
+
+  const addBuilding = async () => {
+    let proposedName = document.getElementById('newBuildingName').value
+    try {
+      await fetch("/yellow/config/sections/addbuilding", {
+          method: "POST",
+          body: JSON.stringify({
+            "name": proposedName
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((res) => {
+          document.getElementById('newBuildingName').classList.add("input-success");
+          return res
+        })
+        .then((res) => {
+          setTimeout(() => {
+            window.location.href = res.url;
+          }, 500)
+        })
+
+
+    } catch (err) {
+      console.log(err)
+      document.getElementById('newBuildingName').classList.add("input-error")
+    }
+  }
+
+  const editBuildingSection = async (e) => {
+    if (document.getElementById(`BAR${e}`)) {
+      let proposedName = document.getElementById(`BAR${e}`).value
+
+      try {
+        if (proposedName.length < 1) {
+          throw new Error('String must not be empty.')
+        }
+        await fetch("/yellow/config/sections/editbuildingsection", {
+            method: "POST",
+            body: JSON.stringify({
+              "name": proposedName,
+              "id": e
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((res) => {
+            document.getElementById(`BAR${e}`).classList.remove("input-warning");
+            return res
+          })
+          .then((res) => {
+            document.getElementById(`BAR${e}`).classList.add("input-success");
+            return res
+          })
+          .then((res) => {
+            setTimeout(() => {
+              window.location.href = res.url;
+            }, 500)
+          })
+      } catch (err) {
+        console.log(err)
+        document.getElementById(`BAR${e}`).classList.remove("input-warning")
+        document.getElementById(`BAR${e}`).classList.add("input-error")
+      }
+    } else {
+      const remainingText = document.getElementById(e).innerText
+      console.log(remainingText)
+      document.getElementById(e).innerHTML = `<input id="BAR${e}" class="input input-bordered input-warning w-full max-w-xs" value=${remainingText}>`
+    }
+  }
+
+  const addBuildingSection = async () => {
+    let proposedName = document.getElementById('newBuildingSectionName').value
+    try {
+      await fetch("/yellow/config/sections/addbuildingsection", {
+          method: "POST",
+          body: JSON.stringify({
+            "name": proposedName
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((res) => {
+          document.getElementById('newBuildingSectionName').classList.add("input-success");
+          return res
+        })
+        .then((res) => {
+          setTimeout(() => {
+            window.location.href = res.url;
+          }, 500)
+        })
+
+
+    } catch (err) {
+      console.log(err)
+      document.getElementById('newBuildingSectionName').classList.add("input-error")
+    }
+
+
+  }
+</script>
+
+<head>
+  <title>Configure Sections</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<header><%- include('../yellowtoolbar.ejs', {pageLocation: 'Configure'}); %></header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-16">
+      <div id="config-menu-bar" class="col-span-1">
+        <ul class="menu menu-compact lg:menu-normal bg-accent-content border-primary border w-full p-2 rounded-box">
+          <li>
+            <a class="active" href="/yellow/config/sections/">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Library Buildings & Sections
+            </a>
+          </li>
+          <li>
+            <a href="/yellow/config/about/">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              About Software
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3">
+        <div class="mb-4">
+          <div class="uppercase">Configure</div>
+          <div class="text-4xl font-semibold">Library Layout</div>
+        </div>
+        <div id="sections-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div id="buildingsGoHere">
+            <div class="text-3xl font-semibold mb-4">
+              <svg class="inline-block align-middle h-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z" />
+                <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z" />
+              </svg>
+              <div class="inline-block align-middle">Buildings</div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="table w-full">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (var i = 0; i < buildings.length; /* I save the data
+                    in a variable 'quotation', I don't know how you named your
+                    variable */ i++) { %>
+                  <tr>
+                    <td id="<%= buildings[i]["_id"] %>"><%= buildings[i].name %></td>
+                    <td><button class="btn btn-primary" onclick="editBuilding('<%= buildings[i]["_id"] %>')">Edit</button>
+                      <button class="btn btn-error" onclick="window.location.href='/yellow/config/sections/deletebuilding/<%= buildings[i]["_id"] %>'">Delete</button>
+                    </td>
+                  </tr>
+                  <% } %>
+                  <tr>
+                    <td>
+                      <input type="text" id="newBuildingName" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                    </td>
+                    <td><button class="btn btn-primary" onclick="addBuilding()">Add</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="sectionsGoHere">
+            <div class="text-3xl font-semibold mb-4">
+              <svg class="inline-block align-middle h-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bookshelf" viewBox="0 0 16 16">
+                <path d="M2.5 0a.5.5 0 0 1 .5.5V2h10V.5a.5.5 0 0 1 1 0v15a.5.5 0 0 1-1 0V15H3v.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zM3 14h10v-3H3v3zm0-4h10V7H3v3zm0-4h10V3H3v3z" />
+              </svg>
+              <div class="inline-block align-middle">Sections</div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="table w-full">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (var i = 0; i < sections.length; /* I save the data
+                    in a variable 'quotation', I don't know how you named your
+                    variable */ i++) { %>
+                  <tr>
+                    <td id="<%= sections[i]["_id"] %>"><%= sections[i].name %></td>
+                    <td><button class="btn btn-primary" onclick="editBuildingSection('<%= sections[i]["_id"] %>')">Edit</button>
+                      <button class="btn btn-error" onclick="window.location.href='/yellow/config/sections/deletebuildingsection/<%= sections[i]["_id"] %>'">Delete</button>
+                    </td>
+                  </tr>
+                  <% } %>
+                  <tr>
+                    <td>
+                      <input type="text" id="newBuildingSectionName" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                    </td>
+                    <td><button class="btn btn-primary" onclick="addBuildingSection()">Add</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

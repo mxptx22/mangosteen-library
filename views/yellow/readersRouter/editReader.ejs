@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Reader</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <header>
+    <%- include('../yellowtoolbar.ejs', {pageLocation: 'Readers'}) %>
+
+  </header>
+  <body>
+<div id="wrapper" class="mx-6 my-6">
+    <div class="mb-4">
+      <div class="uppercase">Readers</div>
+      <div class="text-4xl font-semibold">Edit <%= reader.firstName %> <%= reader.surName %> </div>
+    </div>
+    <%- include('./readerForm.ejs', {readerIdNumber: locals.readerIdNumber, reader: locals.reader}) %>
+
+
+</div>

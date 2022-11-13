@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>All Loans</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<script>
+  const showSearchComponent = () => {
+    document.getElementById('tabs-component').classList.add('hidden')
+    document.getElementById('search-component').classList.remove('hidden')
+    document.getElementById('search-toggle-button').classList.add('hidden')
+    document.getElementById('tabs-toggle-button').classList.remove('hidden')
+  }
+  const showTabsComponent = () => {
+    document.getElementById('tabs-component').classList.remove('hidden')
+    document.getElementById('search-component').classList.add('hidden')
+    document.getElementById('search-toggle-button').classList.remove('hidden')
+    document.getElementById('tabs-toggle-button').classList.add('hidden')
+  }
+</script>
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Counter'}); %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
+    <div class="mb-4">
+      <div class="uppercase">Counter</div>
+      <div class="text-4xl font-semibold">All Loans</div>
+    </div>
+    <div class="btn-control mb-4 flex flex-col-reverse md:flex-row justify-between gap-5">
+      <div class="flex items-center gap-1">
+        <a href="/yellow/counter/loans/new" class="btn btn-primary">New Loan</a>
+        <button class="btn btn-square btn-secondary" id="search-toggle-button" onclick="showSearchComponent()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </svg>
+        </button>
+        <button class="btn btn-square btn-secondary hidden" id="tabs-toggle-button" onclick="showTabsComponent()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M0 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm6 3h4V5H6v4zm9-1V6a1 1 0 0 0-1-1h-3v4h3a1 1 0 0 0 1-1z" />
+          </svg>
+        </button>
+      </div>
+      <div class="self-center">
+        <div id="tabs-component" class="tabs">
+          <a href="/yellow/counter/loans/" class="tab tab-md md:tab-lg tab-bordered">All Loans</a>
+          <a href="/yellow/counter/loans/onloan" class="tab tab-md md:tab-lg tab-bordered">On Loan</a>
+          <a href="/yellow/counter/loans/overdue" class="tab tab-md md:tab-lg tab-bordered tab-active">Overdue</a>
+        </div>
+        <div id="search-component" class="hidden">
+          <form action="/yellow/counter/loans/search" method="POST" class="flex gap-2 items-center ">
+            <input name="searchInput" type="text" placeholder="Search Loans" class="input input-bordered input-md w-full max-w-xs" />
+            <button class="btn btn-square btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="table table-compact lg:table-normal w-full">
+
+        <thead>
+          <tr>
+            <th>Copy ID Number</th>
+            <th>Book Title</th>
+            <th>Book ID Number</th>
+            <th>Author</th>
+            <th>Holder</th>
+            <th>Return Due Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < loansOnLoan.length; i++) { %>
+          <tr>
+            <td><%= loansOnLoan[i]["collectionCopy"][0]["copyIDNumber"] %></td>
+            <td><%= loansOnLoan[i]["book"]["title"] %></td>
+            <td><%= loansOnLoan[i]["book"]["bookIDNumber"] %></td>
+            <td><%= loansOnLoan[i]["book"]["author"] %></td>
+            <td><%= loansOnLoan[i]["reader"]["firstName"] %> <%= loansOnLoan[i]["reader"]["surName"] %></td>
+            <td> <%= loansOnLoan[i]["dateToReturn"].getDate() %>/<%= (loansOnLoan[i]["dateToReturn"].getMonth() + 1) %>/<%= loansOnLoan[i]["dateToReturn"].getFullYear() %></td>
+            <td>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='/yellow/counter/loans/return/<%= loansOnLoan[i]['_id'] %>'">Return</button>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='/yellow/counter/loans/prolong/<%= loansOnLoan[i][`_id`] %>'">Prolong</button>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+
+</body>
+
+</html>

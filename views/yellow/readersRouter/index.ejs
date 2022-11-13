@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>All Readers</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Readers'}); %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
+    <div class="mb-4">
+      <div class="uppercase">Readers</div>
+      <div class="text-4xl font-semibold">All Readers</div>
+    </div>
+    <div class="flex justify-between items-center mb-4">
+      <div class="btn-control">
+        <a href="/yellow/readers/add" class="btn btn-primary">New Reader</a>
+      </div>
+      <form action="/yellow/readers/search" method="POST">
+        <div id="search-component" class="hidden md:flex gap-2 items-center">
+          <input name="searchInput" type="text" placeholder="Search Readers" class="input input-bordered input-md w-full max-w-xs" />
+          <button type="submit" class="btn btn-square btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="table table-compact lg:table-normal w-full">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>Reader ID Number</th>
+            <th>Name</th>
+            <th>E-mail Address</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < readers.length; i++) { %>
+          <tr>
+            <td><%= readers[i]["readerIDNumber"] %></td>
+            <td><%= readers[i]["firstName"] %> <%= readers[i]["surName"] %></td>
+            <td><%= readers[i]["emailAddress"] %></td>
+            <td><%= readers[i]["phoneNumber"] %></td>
+            <td>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='/yellow/readers/view/<%= readers[i][`_id`] %>'">View</button>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='/yellow/readers/edit/<%= readers[i][`_id`] %>'">Edit</button>
+              <span class="mx-2"></span>
+              <button class="btn btn-error btn-sm" onclick="window.location.href='/yellow/readers/delete/<%= readers[i][`_id`] %>'">Delete</button>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+
+
+
+
+</body>
+
+</html>

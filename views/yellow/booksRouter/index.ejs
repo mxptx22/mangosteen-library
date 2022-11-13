@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>All Books</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Books'}); %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
+    <div class="mb-4">
+      <div class="uppercase">Books</div>
+      <div class="text-4xl font-semibold">All Books</div>
+    </div>
+    <div class="flex justify-between space-between mb-4">
+      <div class="btn-control">
+        <a href="/yellow/books/add" class="btn btn-primary">New Book</a>
+      </div>
+      <form action="/yellow/books/search" method="POST">
+        <div id="search-component" class="hidden md:flex gap-2 items-center">
+          <input name="searchInput" type="text" placeholder="Search Books" class="input input-bordered input-md w-full max-w-xs" />
+          <button type="submit" class="btn btn-square btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="table table-compact lg:table-normal w-full">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Book ID Number</th>
+            <th>Author</th>
+            <th>Edition</th>
+            <th>Publisher</th>
+            <th>ISBN Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < books.length; i++) { %>
+          <tr>
+            <td><%= books[i]["title"] %></td>
+            <td><%= books[i]["bookIDNumber"] %></td>
+            <td><%= books[i]["author"] %></td>
+            <td><%= books[i]["edition"] %></td>
+            <td><%= books[i]["publisher"] %></td>
+            <td><%= books[i]["ISBN"] %></td>
+            <td>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='/yellow/books/view/<%= books[i][`_id`] %>'">View</button>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='/yellow/books/edit/<%= books[i][`_id`] %>'">Edit</button>
+              <span class="mx-2"></span>
+              <button class="btn btn-error btn-sm" onclick="window.location.href='/yellow/books/delete/<%= books[i][`_id`] %>'">Delete</button>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+</body>
+
+</html>
