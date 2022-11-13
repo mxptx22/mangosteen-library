@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Edit Book</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
 
-  <header>
-    <%- include('../yellowtoolbar.ejs', {pageLocation: 'Books'}) %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  </header>
-  <body>
-<div id="wrapper" class="mx-6 my-6">
+<head>
+  <title>Edit Book</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Books'}) %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
     <div class="mb-4">
       <div class="uppercase">Books</div>
       <div class="text-4xl font-semibold">Edit <%= book.title %> </div>
     </div>
     <%- include('./bookForm.ejs', {bookIdNumber: locals.bookIdNumber, book: locals.book}) %>
-</div>
+  </div>

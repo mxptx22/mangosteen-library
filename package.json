@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build:css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css --watch",
-    "start": "nodemon ./bin/www & npm run build:css"
+    "dev": "nodemon ./bin/www & npm run build:css",
+    "start": "./bin/www & npm run build:css"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",

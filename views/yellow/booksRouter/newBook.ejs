@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>New Book</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
 
-  <header>
-    <%- include('../yellowtoolbar.ejs', {pageLocation: 'Books'}) %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  </header>
-  <body>
-<div id="wrapper" class="mx-6 my-6">
+<head>
+  <title>New Book</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Books'}) %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
     <div class="mb-4">
       <div class="uppercase">Books</div>
       <div class="text-4xl font-semibold">Add New Book</div>
@@ -18,4 +22,4 @@
     <%- include('./bookForm.ejs', {bookIdNumber: Math.floor(Math.random()*100000000000), buildings: buildings, buildingSections: buildingSections}); %>
 
 
-</div>
+  </div>
