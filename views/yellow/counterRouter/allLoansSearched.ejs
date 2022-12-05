@@ -124,11 +124,12 @@
             <td><%= loansReturned[i]["reader"]["firstName"] %> <%= loansReturned[i]["reader"]["surName"] %></td>
             <td> <%= loansReturned[i]["dateReturned"].getDate() %>/<%= (loansReturned[i]["dateReturned"].getMonth() + 1) %>/<%= loansReturned[i]["dateReturned"].getFullYear() %></td>
             <td>
-              <button class="btn btn-warning btn-sm" onclick="window.location.href='/yellow/counter/loans/revertreturn/<%= loansReturned[i][`_id`] %>/<%= loansReturned[i][`collectionCopy`][0][`_id`]'">Revert</button>
+              <button class="btn btn-warning btn-sm" onclick="window.location.href='/yellow/counter/loans/revertreturn/<%= loansReturned[i][`_id`] %>/<%= loansReturned[i][`collectionCopy`][0][`_id`]%>'">Revert</button>
               <button class="btn btn-error btn-sm" onclick="window.location.href='/yellow/counter/loans/delete/<%= loansReturned[i][`_id`] %>'">Archive</button>
             </td>
           </tr>
           <% } %>
+
         </tbody>
       </table>
     </div>

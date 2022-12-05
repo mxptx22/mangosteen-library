@@ -224,10 +224,14 @@ router.post("/loans/search", async function (req, res, next) {
       );
     });
 
-    res.render("yellow/counterRouter/allLoansSearched", {
-      loansOnLoan: searchedLoansOnLoan,
-      loansReturned: searchedLoansReturned,
-    });
+    try {
+      res.render("yellow/counterRouter/allLoansSearched", {
+        loansOnLoan: searchedLoansOnLoan,
+        loansReturned: searchedLoansReturned,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   } catch (err) {
     res.send(err);
   }
