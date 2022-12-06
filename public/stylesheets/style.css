@@ -580,129 +580,127 @@ html {
   --er: 338 50% 45%;
   --erc: 345 29% 97%;
 }
-@font-face {
-        font-family: 'Gudea';
-        src: url('../fonts/Gudea-Regular.otf');
-    }
-@font-face {
-        font-family: 'Route159';
-        font-weight: 100;
-        src: url('../fonts/route159-ultralight.otf');
-    }
+  header {
+  z-index: 50;
+  padding-bottom: 5rem;
+}
 
-@font-face {
-        font-family: 'Route159';
-        font-weight: 100;
-        font-style: italic;
-        src: url('../fonts/route159-ultralightitalic.otf');
-    }
-@font-face {
-        font-family: 'Route159';
-        font-weight: 200;
-        src: url('../fonts/route159-light.otf');
-    }
+  @font-face {
+    font-family: "Gudea";
+    src: url("../fonts/Gudea-Regular.otf");
+  }
+  @font-face {
+    font-family: "Route159";
+    font-weight: 100;
+    src: url("../fonts/route159-ultralight.otf");
+  }
 
-@font-face {
-        font-family: 'Route159';
-        font-weight: 200;
-        font-style: italic;
-        src: url('../fonts/route159-lightitalic.otf');
-    }
-@font-face {
-        font-family: 'Route159';
-        font-weight: 300;
-        src: url('../fonts/route159-light.otf');
-    }
-    
-@font-face {
-    font-family: 'Route159';
+  @font-face {
+    font-family: "Route159";
+    font-weight: 100;
+    font-style: italic;
+    src: url("../fonts/route159-ultralightitalic.otf");
+  }
+  @font-face {
+    font-family: "Route159";
+    font-weight: 200;
+    src: url("../fonts/route159-light.otf");
+  }
+
+  @font-face {
+    font-family: "Route159";
+    font-weight: 200;
+    font-style: italic;
+    src: url("../fonts/route159-lightitalic.otf");
+  }
+  @font-face {
+    font-family: "Route159";
+    font-weight: 300;
+    src: url("../fonts/route159-light.otf");
+  }
+
+  @font-face {
+    font-family: "Route159";
     font-weight: 300;
     font-style: italic;
-    src: url('../fonts/route159-lightitalic.otf');
-}
+    src: url("../fonts/route159-lightitalic.otf");
+  }
 
-@font-face {
-        font-family: 'Route159';
-        font-weight: 400;
-        font-style: italic;
-        src: url('../fonts/route159-italic.otf');
-    }
-@font-face {
-        font-family: 'Route159';
-        font-weight: 400;
-        src: url('../fonts/route159-regular.otf');
-    }
+  @font-face {
+    font-family: "Route159";
+    font-weight: 400;
+    font-style: italic;
+    src: url("../fonts/route159-italic.otf");
+  }
+  @font-face {
+    font-family: "Route159";
+    font-weight: 400;
+    src: url("../fonts/route159-regular.otf");
+  }
 
-
-@font-face {
-    font-family: 'Route159';
+  @font-face {
+    font-family: "Route159";
     font-weight: 500;
-    src: url('../fonts/route159-semibold.otf');
-}
+    src: url("../fonts/route159-semibold.otf");
+  }
 
-@font-face {
-    font-family: 'Route159';
+  @font-face {
+    font-family: "Route159";
     font-weight: 500;
     font-style: italic;
-    src: url('../fonts/route159-semibolditalic.otf');
-}
+    src: url("../fonts/route159-semibolditalic.otf");
+  }
 
-@font-face {
-    font-family: 'Route159';
+  @font-face {
+    font-family: "Route159";
     font-weight: 600;
     font-style: italic;
-    src: url('../fonts/route159-semibolditalic.otf');
-}
-@font-face {
-    font-family: 'Route159';
+    src: url("../fonts/route159-semibolditalic.otf");
+  }
+  @font-face {
+    font-family: "Route159";
     font-weight: 600;
-    src: url('../fonts/route159-semibold.otf');
-}
+    src: url("../fonts/route159-semibold.otf");
+  }
 
-@font-face {
-    font-family: 'Route159';
+  @font-face {
+    font-family: "Route159";
     font-weight: 700;
     font-style: italic;
-    src: url('../fonts/route159-semibolditalic.otf');
-}
-@font-face {
-    font-family: 'Route159';
+    src: url("../fonts/route159-semibolditalic.otf");
+  }
+  @font-face {
+    font-family: "Route159";
     font-weight: 700;
-    src: url('../fonts/route159-semibold.otf');
-}
+    src: url("../fonts/route159-semibold.otf");
+  }
 
-@font-face {
-    font-family: 'Route159';
+  @font-face {
+    font-family: "Route159";
     font-weight: 800;
     font-style: italic;
-    src: url('../fonts/route159-bolditalic.otf');
-}
-@font-face {
-    font-family: 'Route159';
+    src: url("../fonts/route159-bolditalic.otf");
+  }
+  @font-face {
+    font-family: "Route159";
     font-weight: 800;
-    src: url('../fonts/route159-bold.otf');
-}
-@font-face {
-    font-family: 'Route159';
+    src: url("../fonts/route159-bold.otf");
+  }
+  @font-face {
+    font-family: "Route159";
     font-weight: 900;
     font-style: italic;
-    src: url('../fonts/route159-heavyitalic.otf');
-}
-@font-face {
-    font-family: 'Route159';
+    src: url("../fonts/route159-heavyitalic.otf");
+  }
+  @font-face {
+    font-family: "Route159";
     font-weight: 900;
-    src: url('../fonts/route159-heavy.otf');
-}
+    src: url("../fonts/route159-heavy.otf");
+  }
 
-
-
-
-
-
-
-    html {
-        font-family: Route159
-    }
+  html {
+    font-family: Route159;
+  }
 
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
@@ -2724,6 +2722,9 @@ html {
 .w-2 {
   width: 0.5rem;
 }
+.w-screen {
+  width: 100vw;
+}
 .w-5\/6 {
   width: 83.333333%;
 }
@@ -3285,12 +3286,12 @@ html {
   transition-duration: 200ms;
 }
 
-         .label {
+.label {
   justify-content: flex-start;
   gap: 0.5rem;
 }
 
-        .label-text-alt {
+.label-text-alt {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3319,19 +3320,19 @@ html {
   color: hsl(var(--sc) / var(--tw-text-opacity));
 }
 
-        .badge-outline.label-text-alt {
+.badge-outline.label-text-alt {
   --tw-text-opacity: 1;
   color: hsl(var(--s) / var(--tw-text-opacity));
 }
 
-        .btn-outline .label-text-alt {
+.btn-outline .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--nf, var(--n)) / var(--tw-border-opacity));
   --tw-text-opacity: 1;
   color: hsl(var(--nc) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-primary .label-text-alt {
+.btn-outline.btn-primary .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--p) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3340,7 +3341,7 @@ html {
   color: hsl(var(--pc) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-secondary .label-text-alt {
+.btn-outline.btn-secondary .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--s) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3349,7 +3350,7 @@ html {
   color: hsl(var(--sc) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-accent .label-text-alt {
+.btn-outline.btn-accent .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--a) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3358,13 +3359,13 @@ html {
   color: hsl(var(--ac) / var(--tw-text-opacity));
 }
 
-        .btn-outline .label-text-alt.outline {
+.btn-outline .label-text-alt.outline {
   --tw-border-opacity: 1;
   border-color: hsl(var(--nf, var(--n)) / var(--tw-border-opacity));
   background-color: transparent;
 }
 
-        .btn-outline:hover .label-text-alt {
+.btn-outline:hover .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--b2, var(--b1)) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3373,14 +3374,14 @@ html {
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
 
-        .btn-outline:hover .label-text-alt.outline {
+.btn-outline:hover .label-text-alt.outline {
   --tw-border-opacity: 1;
   border-color: hsl(var(--b2, var(--b1)) / var(--tw-border-opacity));
   --tw-text-opacity: 1;
   color: hsl(var(--nc) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-primary:hover .label-text-alt {
+.btn-outline.btn-primary:hover .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--pc) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3389,7 +3390,7 @@ html {
   color: hsl(var(--p) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-primary:hover .label-text-alt.outline {
+.btn-outline.btn-primary:hover .label-text-alt.outline {
   --tw-border-opacity: 1;
   border-color: hsl(var(--pc) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3398,7 +3399,7 @@ html {
   color: hsl(var(--pc) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-secondary:hover .label-text-alt {
+.btn-outline.btn-secondary:hover .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--sc) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3407,7 +3408,7 @@ html {
   color: hsl(var(--s) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-secondary:hover .label-text-alt.outline {
+.btn-outline.btn-secondary:hover .label-text-alt.outline {
   --tw-border-opacity: 1;
   border-color: hsl(var(--sc) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3416,7 +3417,7 @@ html {
   color: hsl(var(--sc) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-accent:hover .label-text-alt {
+.btn-outline.btn-accent:hover .label-text-alt {
   --tw-border-opacity: 1;
   border-color: hsl(var(--ac) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3425,7 +3426,7 @@ html {
   color: hsl(var(--a) / var(--tw-text-opacity));
 }
 
-        .btn-outline.btn-accent:hover .label-text-alt.outline {
+.btn-outline.btn-accent:hover .label-text-alt.outline {
   --tw-border-opacity: 1;
   border-color: hsl(var(--ac) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3434,7 +3435,7 @@ html {
   color: hsl(var(--ac) / var(--tw-text-opacity));
 }
 
-        .label-text-alt {
+.label-text-alt {
   height: 1rem;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -3444,32 +3445,32 @@ html {
   text-transform: uppercase;
 }
 
-        .hover\:bg-primary-focus:hover {
+.hover\:bg-primary-focus:hover {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
 }
 
-        .hover\:bg-accent-content:hover {
+.hover\:bg-accent-content:hover {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--ac) / var(--tw-bg-opacity));
 }
 
-        .hover\:text-gray-500:hover {
+.hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-        .hover\:text-primary-focus:hover {
+.hover\:text-primary-focus:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--pf, var(--p)) / var(--tw-text-opacity));
 }
 
-        .focus\:border-primary:focus {
+.focus\:border-primary:focus {
   --tw-border-opacity: 1;
   border-color: hsl(var(--p) / var(--tw-border-opacity));
 }
 
-        @keyframes ping {
+@keyframes ping {
 
   75%, 100% {
     transform: scale(2);
@@ -3477,11 +3478,11 @@ html {
   }
 }
 
-        .active\:animate-ping:active {
+.active\:animate-ping:active {
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-        @media (min-width: 640px) {
+@media (min-width: 640px) {
 
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3498,7 +3499,7 @@ html {
   }
 }
 
-        @media (min-width: 768px) {
+@media (min-width: 768px) {
 
   .btn.loading.md\:btn-sm:before {
     height: 0.75rem;
@@ -3641,7 +3642,7 @@ html {
   }
 }
 
-        @media (min-width: 1024px) {
+@media (min-width: 1024px) {
 
   .btn.loading.lg\:btn-sm:before {
     height: 0.75rem;
@@ -3770,7 +3771,7 @@ html {
   }
 }
 
-        @media (min-width: 1280px) {
+@media (min-width: 1280px) {
 
    
     .btn.loading.xl\:btn-lg:before {
@@ -3836,7 +3837,7 @@ html {
   }
 }
 
-        @media (min-width: 1536px) {
+@media (min-width: 1536px) {
 
   .\32xl\:text-5xl {
     font-size: 3rem;
