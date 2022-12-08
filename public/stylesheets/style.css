@@ -3128,13 +3128,13 @@ html {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 .text-3xl {
   font-size: 1.875rem;
@@ -3155,6 +3155,9 @@ html {
 .font-medium {
   font-weight: 500;
 }
+.font-thin {
+  font-weight: 100;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -3166,9 +3169,6 @@ html {
 }
 .font-light {
   font-weight: 300;
-}
-.font-thin {
-  font-weight: 100;
 }
 .font-extralight {
   font-weight: 200;
@@ -3227,6 +3227,9 @@ html {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+.underline {
+  text-decoration-line: underline;
 }
 .opacity-20 {
   opacity: 0.2;
@@ -3639,6 +3642,11 @@ html {
   .md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
