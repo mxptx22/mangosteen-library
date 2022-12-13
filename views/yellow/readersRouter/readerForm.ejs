@@ -29,20 +29,20 @@
           <input type="text" id="readerIDNumberBar" placeholder="Reader's ID Number" class="input input-bordered w-full max-w-xs" value="<%=readerIdNumber%>" disabled />
           <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">General</div>
           <label class="label"><span class="label-text">First Name</span><span class="label-text-alt">*</span></label>
-          <input type="text" placeholder="Reader's First Name" id="readerFirstNameBar" class="input input-bordered w-full max-w-xs" name="firstName" <% if(locals.reader){ %> value="<%=reader.firstName%>" <% } %> />
+          <input type="text" placeholder="Reader's First Name" id="readerFirstNameBar" class="input input-bordered w-full max-w-xs" <% if(locals.reader){ %> value="<%=reader.firstName%>" <% } %> />
           <label class="label"><span class="label-text">Surname</span><span class="label-text-alt">*</span></label>
-          <input type="text" placeholder="Reader's Surname" id="readerSurNameBar" class="input input-bordered w-full max-w-xs" name="surName" <% if(locals.reader){ %> value="<%=reader.surName%>" <% } %> />
+          <input type="text" placeholder="Reader's Surname" id="readerSurNameBar" class="input input-bordered w-full max-w-xs" <% if(locals.reader){ %> value="<%=reader.surName%>" <% } %> />
           <label class="label"><span class="label-text">Phone Number</span><span class="label-text-alt">*</span></label>
-          <input type="text" placeholder="Reader's Phone" id="readerPhoneNumberBar" class="input input-bordered w-full max-w-xs" name="phoneNumber" <% if(locals.reader){ %> value="<%=reader.phoneNumber%>" <% } %> />
+          <input type="text" placeholder="Reader's Phone" id="readerPhoneNumberBar" class="input input-bordered w-full max-w-xs" <% if(locals.reader){ %> value="<%=reader.phoneNumber%>" <% } %> />
           <label class="label"><span class="label-text">E-mail Address</span><span class="label-text-alt">*</span></label>
-          <input type="text" placeholder="Reader's E-mail Address" id="readerEmailAddressBar" class="input input-bordered w-full max-w-xs" name="emailAddress" <% if(locals.reader){ %> value="<%=reader.emailAddress%>" <% } %> />
+          <input type="text" placeholder="Reader's E-mail Address" id="readerEmailAddressBar" class="input input-bordered w-full max-w-xs" <% if(locals.reader){ %> value="<%=reader.emailAddress%>" <% } %> />
         </div>
         <div>
           <div class="mt-4 ml-1 uppercase badge badge-md badge-primary rounded-sm text-xs block">Residential Address</div>
           <label class="label"><span class="label-text">Address Line 1</span><span class="label-text-alt">*</span></label>
-          <input type="text" placeholder="Reader's Address" class="input input-bordered w-full max-w-xs" name="address1" <% if(locals.reader){ %> value="<%=reader.address1%>" <% } %> />
+          <input type="text" placeholder="Reader's Address" class="input input-bordered w-full max-w-xs" <% if(locals.reader){ %> value="<%=reader.address1%>" <% } %> />
           <label class="label"><span class="label-text">Address Line 2</span></label>
-          <input type="text" placeholder="Reader's Address Continued" class="input input-bordered w-full max-w-xs" name="address2" <% if(locals.reader){ %> value="<%=reader.address2%>" <% } %> />
+          <input type="text" placeholder="Reader's Address Continued" class="input input-bordered w-full max-w-xs" <% if(locals.reader){ %> value="<%=reader.address2%>" <% } %> />
           <label class="label"><span class="label-text">Post Code</span><span class="label-text-alt">*</span></label>
           <input type="text" placeholder="Reader's Post Code" class="input input-bordered w-full max-w-xs" name="addressPostcode" <% if(locals.reader){ %> value="<%=reader.addressPostcode%>" <% } %> />
           <label class="label"><span class="label-text">City</span><span class="label-text-alt">*</span></label>

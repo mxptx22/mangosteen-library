@@ -2298,6 +2298,9 @@ html {
 .min-h-16 {
   min-height: 4rem;
 }
+.artboard.phone {
+  width: 320px;
+}
 .badge-sm {
   height: 1rem;
   font-size: 0.75rem;
@@ -2543,8 +2546,8 @@ html {
 .mb-0 {
   margin-bottom: 0px;
 }
-.mt-1 {
-  margin-top: 0.25rem;
+.mt-2 {
+  margin-top: 0.5rem;
 }
 .mb-4 {
   margin-bottom: 1rem;
@@ -2582,9 +2585,6 @@ html {
 .ml-1 {
   margin-left: 0.25rem;
 }
-.mt-2 {
-  margin-top: 0.5rem;
-}
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -2599,6 +2599,9 @@ html {
 }
 .ml-0 {
   margin-left: 0px;
+}
+.mb-12 {
+  margin-bottom: 3rem;
 }
 .block {
   display: block;
@@ -3230,9 +3233,6 @@ html {
 }
 .underline {
   text-decoration-line: underline;
-}
-.underline-offset-2 {
-  text-underline-offset: 2px;
 }
 .underline-offset-4 {
   text-underline-offset: 4px;

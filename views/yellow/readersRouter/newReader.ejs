@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>New Reader</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
 
-  <header>
-    <%- include('../yellowtoolbar.ejs', {pageLocation: 'Readers'}) %>
+<head>
+  <title>New Reader</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 
-  </header>
-  <body>
-<div id="wrapper" class="mx-6 my-6">
+<header>
+  <%- include('../yellowtoolbar.ejs', {pageLocation: 'Readers'}) %>
+
+</header>
+
+<body>
+  <div id="wrapper" class="mx-6 my-6">
     <div class="mb-4">
       <div class="uppercase">Readers</div>
       <div class="text-4xl font-semibold">Register New Reader</div>
     </div>
+
+    <%- include('./fictitiousdata-banner.ejs'); %>
     <%- include('./readerForm.ejs', {readerIdNumber: Math.floor(Math.random()*100000000)}); %>
 
 
-</div>
+  </div>

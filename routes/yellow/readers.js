@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const Reader = require("../../models/Reader");
 const Loan = require("../../models/Loan");
+var _ = require("lodash");
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -31,6 +32,97 @@ router.get("/view/:id", async function (req, res, next) {
   }
 });
 
+const firstNames = [
+  "Annalisa",
+  "Cooper",
+  "Joe",
+  "River",
+  "Victoria",
+  "Marc",
+  "Hugo",
+  "Anna",
+  "Michelle",
+  "Kaili",
+  "Judith",
+  "Hailie",
+  "Christine",
+  "Maya",
+  "Sophia",
+  "Bryce",
+  "Oliver",
+  "Craig",
+  "Philip",
+];
+
+const lastNames = [
+  "Lee",
+  "Colwell",
+  "Ford",
+  "Moffett",
+  "Orlando",
+  "Butterfield",
+  "Wilbur",
+  "Willoughby",
+  "Everett",
+  "Schaffer",
+  "Durand",
+  "Lunsford",
+  "Jensen",
+  "Sexton",
+  "Haskins",
+  "Westmore",
+  "Griffin",
+  "Carter",
+  "Milton",
+  "Russell",
+];
+
+const emailAddresses = {
+  start: [
+    "mymail",
+    "personal",
+    "contactme",
+    "iuseemail",
+    "willnotrespond",
+    "myinbox",
+    "contactmenot",
+    "sample",
+    "myaddress",
+  ],
+  provider: [
+    "@thisinbox",
+    "@somemail",
+    "@inboxing",
+    "@examplemail",
+    "@exampleaddress",
+    "@mailprov",
+    "@thismail",
+  ],
+  domain: [".web", ".example", ".qu", ".qw", ".zz"],
+};
+
+const addressLines = {
+  name: [
+    "Main",
+    "East",
+    "Lancaster",
+    "Riverside",
+    "Portland",
+    "Lilac",
+    "Carlton",
+    "Gainsborough",
+    "Ruskin",
+    "Woodlands",
+    "Meadow",
+    "Wisteria",
+    "Woodside",
+    "John",
+    "Thomas",
+    "Mill",
+  ],
+  type: ["Lane", "Road", "Street", "Avenue", "Crescent", "Gardens"],
+};
+
 // Add Routes
 router.get("/add", function (req, res, next) {
   try {
@@ -51,12 +143,17 @@ router.post("/add", async function (req, res, next) {
   try {
     let readerNew = new Reader({
       readerIDNumber: req.body.readerIDNumber,
-      firstName: req.body.firstName,
-      surName: req.body.surName,
-      phoneNumber: req.body.phoneNumber,
-      emailAddress: req.body.emailAddress,
-      address1: req.body.address1,
-      address2: req.body.address2,
+      firstName: _.sample(firstNames),
+      surName: _.sample(lastNames),
+      phoneNumber: _.random(3333333333, 6666666666),
+      emailAddress:
+        _.sample(emailAddresses.start) +
+        _.sample(emailAddresses.provider) +
+        _.sample(emailAddresses.domain),
+      address1: `${_.random(1, 44)} ${_.sample(addressLines.name)} ${_.sample(
+        addressLines.type
+      )}`,
+      address2: "",
       addressPostcode: req.body.addressPostcode,
       addressCity: req.body.addressCity,
       localResidence: req.body.localResidence,
@@ -98,16 +195,23 @@ router.post("/edit/:id", async function (req, res, next) {
     await Reader.findOneAndUpdate(
       { _id: req.params.id },
       {
-        firstName: req.body.firstName,
-        surName: req.body.surName,
-        phoneNumber: req.body.phoneNumber,
-        emailAddress: req.body.emailAddress,
-        address1: req.body.address1,
-        address2: req.body.address2,
+        readerIDNumber: req.body.readerIDNumber,
+        firstName: _.sample(firstNames),
+        surName: _.sample(lastNames),
+        phoneNumber: _.random(3333333333, 6666666666),
+        emailAddress:
+          _.sample(emailAddresses.start) +
+          _.sample(emailAddresses.provider) +
+          _.sample(emailAddresses.domain),
+        address1: `${_.random(1, 44)} ${_.sample(addressLines.name)} ${_.sample(
+          addressLines.type
+        )}`,
+        address2: "",
         addressPostcode: req.body.addressPostcode,
         addressCity: req.body.addressCity,
         localResidence: req.body.localResidence,
         educationStatus: req.body.educationStatus,
+        active: true,
       }
     );
     res.redirect("/yellow/readers/");
